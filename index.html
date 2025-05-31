@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlix Ecommerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-color: #00D1D1; /* Professional aqua */
+            --primary-dark: #00B4B4; /* Darker aqua for hover */
+            --text-dark: #222;
+            --text-light: #465b52;
+            --white: #fff;
+            --gray-border: #ddd;
+            --gray-light: #777;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            width: 100%;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 50px;
+            line-height: 64px;
+            color: var(--text-dark);
+        }
+
+        h2 {
+            font-size: 46px;
+            line-height: 54px;
+            color: var(--text-dark);
+        }
+
+        h4 {
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        h6 {
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin: 15px 0 20px 0;
+        }
+
+        .section-p1 {
+            padding: 40px 80px;
+        }
+
+        .section-m1 {
+            margin: 40px 0;
+        }
+
+        /* Hero Section */
+        #hero {
+            background-image: url("https://www.expo2020dubai.com/-/media/expo2020/2021/experiences/sport-and-fitness/fitness-hero-1920x1080.png");
+            height: 90vh;
+            width: 100%;
+            background-position: top 25% right 0;
+            background-size: cover;
+            padding: 0 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        #hero h4 {
+            padding-bottom: 15px;
+            color: var(--white);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        #hero h2 {
+            color: var(--white);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        #hero h1 {
+            color: var(--white);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        #hero p {
+            color: var(--white);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        #hero button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 209, 209, 0.4);
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #hero button:hover {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 180, 180, 0.6);
+        }
+
+        #hero button::after {
+            content: "→";
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        #hero button:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Features Section */
+        #feature {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 40px 80px;
+        }
+
+        #feature .fe-box {
+            width: 180px;
+            text-align: center;
+            padding: 20px 10px;
+            box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+            border: 1px solid #cce7d0;
+            border-radius: 4px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        #feature .fe-box:hover {
+            box-shadow: 10px 10px 54px rgba(70, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        #feature .fe-box img {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #feature .fe-box h6 {
+            display: inline-block;
+            padding: 9px 8px 6px 8px;
+            line-height: 1;
+            border-radius: 4px;
+            color: #088178;
+            background-color: #fddde4;
+        }
+
+        #feature .fe-box:nth-child(2) h6 {
+            background-color: #cdebbc;
+        }
+
+        #feature .fe-box:nth-child(3) h6 {
+            background-color: #d1e8f2;
+        }
+
+        #feature .fe-box:nth-child(4) h6 {
+            background-color: #cdd4f8;
+        }
+
+        #feature .fe-box:nth-child(5) h6 {
+            background-color: #f6dbf6;
+        }
+
+        #feature .fe-box:nth-child(6) h6 {
+            background-color: #fff2e5;
+        }
+
+        /* Products Section */
+        #product1 {
+            text-align: center;
+            padding: 40px 250px;
+        }
+
+        #product1 h2 {
+            margin-bottom: 10px;
+        }
+
+        #product1 p {
+            margin-bottom: 30px;
+        }
+
+        .pro-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding-top: 20px;
+        }
+
+        #product1 .pro {
+            width: 23%;
+            min-width: 250px;
+            padding: 10px 12px;
+            border: 1px solid #cce7d0;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+            margin: 15px 5px;
+            transition: 0.2s ease;
+            background: white;
+        }
+
+        #product1 .pro:hover {
+            box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+            transform: translateY(-5px);
+        }
+
+        #product1 .pro img {
+            width: 100%;
+            border-radius: 20px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        #product1 .pro .des {
+            text-align: start;
+            padding: 10px 0;
+        }
+
+        #product1 .pro .des span {
+            color: #606063;
+            font-size: 12px;
+        }
+
+        #product1 .pro .des h5 {
+            padding-top: 7px;
+            color: #1a1a1a;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        #product1 .pro .des .star {
+            color: gold;
+            font-size: 12px;
+            padding: 6px 0;
+        }
+
+        #product1 .pro .des h4 {
+            padding-top: 7px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        #product1 .pro .cart {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50px;
+            background-color: #e8f6ea;
+            color: var(--primary-color);
+            border: 1px solid #cce7d0;
+            position: absolute;
+            bottom: 20px;
+            right: 10px;
+        }
+
+        /* Why Choose Us Section */
+        #why-choose-us {
+            text-align: center;
+            padding: 80px 40px;
+            background-color: #f8f9fa;
+        }
+
+        #why-choose-us h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #222;
+            position: relative;
+        }
+
+        #why-choose-us h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+        }
+
+        .choose-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .choose-item {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px 20px;
+            margin: 15px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .choose-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .choose-item i {
+            font-size: 50px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .choose-item h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        .choose-item p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Featured Categories Styles */
+        #featured-categories {
+            text-align: center;
+            background: white;
+            padding: 80px 40px;
+        }
+
+        #featured-categories h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        #featured-categories h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #featured-categories p {
+            margin-bottom: 40px;
+            color: var(--text-light);
+        }
+
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-box {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            aspect-ratio: 1/1;
+        }
+
+        .category-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .category-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-box:hover img {
+            transform: scale(1.05);
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px 20px 20px;
+            text-align: center;
+        }
+
+        .category-overlay h3 {
+            color: white;
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+    </style>
+
+</head>
+
+<body>
+    <section id="header">
+        <div class="logo-container">
+            <a href="index.html"><img src="https://i.ibb.co/t7BjmhV/athlix-logo.jpg" class="logo" alt="Athlix"></a>
+            <span class="brand-name">Athlix</span>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-container">
+            <ul id="navbar">
+                <li><a class="active" href="index.html">Home</a></li>
+                <li><a href="shop.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a></li> 
+                <li><a href="login.html"><i class="fa-regular fa-user"></i> Log in</a></li> 
+            </ul>
+        </div>
+    </section>
+    
+    <section id="hero">
+        <h4>LIMITED-TIME DEALS</h4>
+        <h2>GEAR UP & SAVE</h2>
+        <h1>On All Training Essentials</h1>
+        <p>Save more with Deals up to 70% off!</p>
+        <button onclick="window.location.href='shop.html'">Shop Now</button>
+    </section>
+    
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us" class="section-p1">
+        <h2>Why Choose Athlix</h2>
+        <div class="choose-container">
+            <div class="choose-item">
+                <i class="fas fa-check-circle"></i>
+                <h3>Premium Quality</h3>
+                <p>We source only the highest quality materials for our products to ensure durability and performance.</p>
+            </div>
+            <div class="choose-item">
+                <i class="fas fa-truck"></i>
+                <h3>Fast Delivery</h3>
+                <p>Get your orders delivered quickly with our reliable shipping partners.</p>
+            </div>
+            <div class="choose-item">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Our customer service team is always ready to assist you with any questions.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="feature" class="section-p1">
+        <div class="fe-box">
+            <img src="https://ik.imagekit.io/gsjnm0zep/f1.png?updatedAt=1748669122415&tr=n-ik_ml_thumbnail" alt="">
+            <h6>Free Shipping</h6>
+        </div>
+
+        <div class="fe-box">
+            <img src="https://ik.imagekit.io/gsjnm0zep/f2.png?updatedAt=1748669122494" alt="">
+            <h6>Online Order</h6>
+        </div>
+
+        <div class="fe-box">
+            <img src="https://ik.imagekit.io/gsjnm0zep/f3.png?updatedAt=1748669122458" alt="">
+            <h6>Save Money</h6>
+        </div>
+
+        <div class="fe-box">
+            <img src="https://ik.imagekit.io/gsjnm0zep/f4.png?updatedAt=1748669122467" alt="">
+            <h6>Promotions</h6>
+        </div>
+
+        <div class="fe-box">
+            <img src="https://ik.imagekit.io/gsjnm0zep/f5.png?updatedAt=1748669122464" alt="">
+            <h6>Happy Sell</h6>
+        </div>
+
+        <div class="fe-box">
+            <img src="https://ik.imagekit.io/gsjnm0zep/f6.png?updatedAt=1748669122491&tr=n-ik_ml_thumbnail" alt="">
+            <h6>Customer Service</h6>
+        </div>
+    </section>
+
+    <section id="product1" class="section-p1">
+        <h2>Featured Products</h2>
+        <div class="pro-container">
+            <div class="pro" onclick="window.location.href='details.html?id=premium-resistance-bands'">
+                <img src="https://m.media-amazon.com/images/I/61SzyV-Se9L.jpg" alt="Premium Resistance-Band">
+                <div class="des">
+                    <h5>Premium Resistance Bands</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>₱1,000.00</h4>
+                </div>
+                <a href="details.html?id=premium-resistance-bands"><i class="fal fa-solid fa-cart-shopping cart"></i></a>
+            </div>
+            
+            <div class="pro" onclick="window.location.href='details.html?id=yoga-mat'">
+                <img src="https://cdn.thewirecutter.com/wp-content/media/2024/07/yoga-mat-2048px-1653.jpg" alt="Professional Yoga Mat">
+                <div class="des">
+                    <h5>Premium Non-Slip Yoga Mat</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <h4>₱700.00</h4>
+                </div>
+                <a href="details.html?id=yoga-mat"><i class="fal fa-solid fa-cart-shopping cart"></i></a>
+            </div>
+            
+            <div class="pro" onclick="window.location.href='details.html?id=adjustable-dumbbells'">
+                <img src="https://www.sportshouse.ph/cdn/shop/products/Sportshouse_weights_dumbbell_1_CSI-FW031.jpg?v=1740038758" alt="Adjustable Dumbbells">
+                <div class="des">
+                    <h5>Adjustable Dumbbells (5-25kg)</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <h4>₱4,450.00</h4>
+                </div>
+                <a href="details.html?id=adjustable-dumbbells"><i class="fal fa-solid fa-cart-shopping cart"></i></a>
+            </div>
+        </div>
+    </section>
+
+<!-- Featured Categories Section -->
+<section id="featured-categories" class="section-p1">
+    <h2>Shop By Category</h2>
+    <p>Find the perfect gear for your fitness journey</p>
+    
+    <div class="categories-container">
+        <div class="category-box">
+            <img src="https://images.everydayhealth.com/images/healthy-living/fitness/everything-you-need-know-about-fitness-1440x810.jpg?sfvrsn=2fee0a3b_5" alt="Fitness Equipment">
+            <div class="category-overlay">
+                <h3>Fitness Equipment</h3>
+            </div>
+        </div>
+        
+        <div class="category-box">
+            <img src="https://geckosportsequipment.co.nz/wp-content/uploads/sports-tools_53876-138077.png" alt="Sports Gear">
+            <div class="category-overlay">
+                <h3>Sports Gear</h3>
+            </div>
+        </div> 
+        
+        <div class="category-box">
+            <img src="https://cdn.thewirecutter.com/wp-content/media/2022/03/massageguns-2048px-8401-2x1-1.jpg?width=1024&quality=75&crop=2:1&auto=webp" alt="Wellness & Recovery">
+            <div class="category-overlay">
+                <h3>Wellness & Recovery</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+
+<!-- Footer Section -->
+<footer class="section-p1">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Products</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="Privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="footer-col combined-col">
+            <div class="follow-payment-container">
+                <div class="follow-us">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+                
+                <div class="payment-methods">
+                    <h4>Payment Methods</h4>
+                    <div class="payment-icons">
+                        <img src="https://brandlogos.net/wp-content/uploads/2024/01/gcash-logo_brandlogos.net_kiaqh.png" alt="GCash" title="GCash">
+                        <img src="https://play-lh.googleusercontent.com/iQ8f5plIFy9rrY46Q2TNRwq_8nCvh9LZVwytqMBpOEcfnIU3vTkICQ6L1-RInWS93oQg" alt="PayPal" title="PayPal">
+                        <img src="https://play-lh.googleusercontent.com/fdQjxsIO8BTLaw796rQPZtLEnGEV8OJZJBJvl8dFfZLZcGf613W93z7y9dFAdDhvfqw" alt="Maya" title="Maya">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2553/2553610.png" alt="Cash on Delivery" title="Cash on Delivery">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-col brand-col">
+            <div class="brand-name2">Athlix</div>
+            <p class="footer-slogan">Your Premium Fitness Destination</p>
+            <div class="newsletter">
+                <h4>Newsletter</h4>
+                <input type="email" placeholder="Your email address">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2025 Athlix. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</html>

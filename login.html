@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlix - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        :root {
+            --primary-color: #00D1D1;
+            --primary-dark: #00B4B4;
+            --primary-light: #e6f9f9;
+            --text-dark: #222;
+            --text-light: #465b52;
+            --white: #fff;
+            --gray-border: #e0e0e0;
+            --gray-light: #777;
+            --gray-bg: #f8f9fa;
+            --error-color: #ff4444;
+            --success-color: #00C851;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--gray-bg);
+            color: var(--text-dark);
+            width: 100%;
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 50px;
+            line-height: 64px;
+            color: var(--text-dark);
+        }
+
+        h2 {
+            font-size: 46px;
+            line-height: 54px;
+            color: var(--text-dark);
+        }
+
+        h4 {
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        h6 {
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin: 15px 0 20px 0;
+        }
+
+        /* Auth Container */
+        .auth-container {
+            max-width: 480px;
+            margin: 60px auto;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .auth-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h2 {
+            font-size: 28px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .auth-header p {
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid var(--gray-border);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background-color: var(--gray-bg);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            cursor: pointer;
+            color: var(--gray-light);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .auth-footer p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .auth-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+            color: var(--primary-dark);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .divider::before {
+            margin-right: 10px;
+        }
+
+        .divider::after {
+            margin-left: 10px;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--gray-border);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn i {
+            font-size: 18px;
+        }
+
+        .google-btn { color: #DB4437; }
+        .facebook-btn { color: #4267B2; }
+        .apple-btn { color: #000; }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .search-container {
+                width: 100%;
+            }
+
+            #navbar {
+                gap: 15px;
+            }
+
+            .auth-container {
+                margin: 40px 20px;
+                padding: 30px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 25px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <div class="logo-container">
+            <a href="index.html"><img src="https://i.ibb.co/t7BjmhV/athlix-logo.jpg" class="logo" alt="Athlix"></a>
+            <span class="brand-name">Athlix</span>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search products...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-container">
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a></li> 
+                <li><a class="active" href="login.html"><i class="fa-regular fa-user"></i> Log in</a></li> 
+            </ul>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="auth-container">
+        <div class="auth-header">
+            <h2>Welcome Back</h2>
+            <p>Sign in to access your Athlix account</p>
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                <i class="far fa-eye password-toggle" id="togglePassword"></i>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn-primary">Sign In</button>
+            </div>
+
+            <div class="divider">or continue with</div>
+            
+            <div class="social-login">
+                <div class="social-btn google-btn" onclick="window.location.href='index.html'">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="social-btn facebook-btn" onclick="window.location.href='index.html'">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="social-btn apple-btn" onclick="window.location.href='index.html'">
+                    <i class="fab fa-apple"></i>
+                </div>
+            </div>
+            
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="register.html">Sign up</a></p>
+                <p><a href="forgot.html">Forgot password?</a></p>
+            </div>
+        </form>
+    </div>
+
+<!-- Footer Section -->
+<footer class="section-p1">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Products</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="Privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="footer-col combined-col">
+            <div class="follow-payment-container">
+                <div class="follow-us">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+                
+                <div class="payment-methods">
+                    <h4>Payment Methods</h4>
+                    <div class="payment-icons">
+                        <img src="https://brandlogos.net/wp-content/uploads/2024/01/gcash-logo_brandlogos.net_kiaqh.png" alt="GCash" title="GCash">
+                        <img src="https://play-lh.googleusercontent.com/iQ8f5plIFy9rrY46Q2TNRwq_8nCvh9LZVwytqMBpOEcfnIU3vTkICQ6L1-RInWS93oQg" alt="PayPal" title="PayPal">
+                        <img src="https://play-lh.googleusercontent.com/fdQjxsIO8BTLaw796rQPZtLEnGEV8OJZJBJvl8dFfZLZcGf613W93z7y9dFAdDhvfqw" alt="Maya" title="Maya">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2553/2553610.png" alt="Cash on Delivery" title="Cash on Delivery">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-col brand-col">
+            <div class="brand-name2">Athlix</div>
+            <p class="footer-slogan">Your Premium Fitness Destination</p>
+            <div class="newsletter">
+                <h4>Newsletter</h4>
+                <input type="email" placeholder="Your email address">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2025 Athlix. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        // Simple validation
+        if (!email || !password) {
+            alert('Please fill in all fields');
+            return;
+        }
+        
+        // In a real app, you would validate and send to server
+        console.log('Login attempt:', email, password);
+        
+        // Redirect to home page after login
+        window.location.href = 'index.html';
+    });
+
+    // Toggle password visibility
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function() {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
+</body>
+</html>

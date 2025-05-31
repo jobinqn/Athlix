@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Athlix</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+
+                :root {
+            --primary-color: #00D1D1;
+            --primary-dark: #00B4B4;
+            --text-dark: #222;
+            --text-light: #465b52;
+            --white: #fff;
+            --gray-border: #ddd;
+            --gray-light: #777;
+        }
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            width: 100%;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 50px;
+            line-height: 64px;
+            color: var(--text-dark);
+        }
+
+        h2 {
+            font-size: 46px;
+            line-height: 54px;
+            color: var(--text-dark);
+        }
+
+        h4 {
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        h6 {
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin: 15px 0 20px 0;
+        }
+
+        /* About Page Specific Styles */
+        .about-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .about-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .about-hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--white);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .about-content {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mission-vision {
+            display: flex;
+            gap: 30px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .mission, .vision {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            background: var(--white);
+        }
+
+        .mission h2, .vision h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .mission h2::after, .vision h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-dark);
+        }
+
+        .team-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f9f9f9;
+        }
+
+        .team-members {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            width: 250px;
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 20px;
+        }
+
+        .member-info h3 {
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .member-info p {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--gray-light);
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-col .social-links a {
+            color: var(--white); 
+            transition: color 0.3s ease;
+        }
+
+        .footer-col .social-links a:hover {
+            color: var(--primary-color); 
+        }
+
+        .footer-col .social-links a {
+            color: var(--white);
+        }
+
+
+        .footer-col .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .about-hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .mission-vision {
+                flex-direction: column;
+            }
+        }
+
+    /* Footer Styles */
+    footer {
+        background: var(--text-dark);
+        color: var(--white);
+        padding: 60px 80px 30px;
+    }
+
+    .footer-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    .footer-col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-col h4 {
+        color: var(--white);
+        font-size: 18px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .footer-col h4::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 40px;
+        height: 2px;
+        background: var(--primary-color);
+        transition: all 0.3s ease;
+    }
+
+    .footer-col:hover h4::after {
+        width: 60px;
+    }
+
+    .footer-col a {
+        display: block;
+        color: var(--gray-border);
+        margin-bottom: 12px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        transform: translateX(0);
+    }
+
+    .footer-col a:hover {
+        color: var(--primary-color);
+        transform: translateX(5px);
+    }
+
+    /* Combined Column Styles */
+    .combined-col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .follow-payment-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .follow-us {
+        margin-bottom: 20px;
+    }
+
+    .social-links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .social-links a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--white);
+        transition: all 0.3s ease;
+        transform: translateX(0);
+    }
+
+    .social-links a:hover {
+        color: var(--primary-color);
+        transform: translateX(5px);
+    }
+
+    /* Payment Methods */
+    .payment-methods h4 {
+        margin-bottom: 15px;
+    }
+
+    .payment-icons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .payment-icons img {
+        width: 50px;
+        height: auto;
+        border-radius: 5px;
+        background: white;
+        padding: 5px;
+        transition: all 0.3s ease;
+        transform: translateY(0);
+    }
+
+    .payment-icons img:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 209, 209, 0.3);
+    }
+
+    /* Brand Column */
+    .brand-name2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .footer-col:hover .brand-name2 {
+        color: var(--primary-color);
+    }
+
+    .footer-slogan {
+        color: var(--gray-border);
+        margin-bottom: 20px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .footer-col:hover .footer-slogan {
+        color: var(--white);
+    }
+
+    /* Newsletter */
+    .newsletter {
+        margin-top: 20px;
+    }
+
+    .newsletter input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+    }
+
+    .newsletter input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(0, 209, 209, 0.3);
+        outline: none;
+    }
+
+    .newsletter-btn {
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        transform: translateY(0);
+    }
+
+    .newsletter-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 180, 180, 0.4);
+    }
+
+    /* Copyright */
+    .copyright {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        font-size: 14px;
+        color: var(--gray-border);
+        transition: all 0.3s ease;
+    }
+
+    footer:hover .copyright {
+        color: var(--white);
+    }
+
+    @media (max-width: 768px) {
+        footer {
+            padding: 40px 20px;
+        }
+        
+        .footer-container {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .follow-payment-container {
+            flex-direction: column;
+        }
+        
+        .payment-icons {
+            justify-content: flex-start;
+        }
+
+        .footer-col a:hover {
+            transform: translateX(3px);
+        }
+
+        .social-links a:hover {
+            transform: translateX(3px);
+        }
+    }
+    </style>
+</head>
+<body>
+    <section id="header">
+        <div class="logo-container">
+            <a href="index.html"><img src="https://i.ibb.co/t7BjmhV/athlix-logo.jpg" class="logo" alt="Athlix"></a>
+            <span class="brand-name">Athlix</span>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-container">
+            <ul id="navbar">
+                <li><a  href="index.html">Home</a></li>
+                <li><a href="shop.html">Products</a></li>
+                <li><a class="active" href="about.html">About</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a></li> 
+                <li><a href="login.html"><i class="fa-regular fa-user"></i> Log in</a></li> 
+            </ul>
+        </div>
+    </section>
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1>Our Story</h1>
+            <p>Empowering athletes and fitness enthusiasts with premium gear.</p>
+        </div>
+    </section>
+
+    <!-- About Content Section -->
+    <section class="about-content">
+        <h2>Welcome to Athlix</h2>
+        <p>Athlix began as a final project by 1st year Information Technology students of Our Lady of Fatima University QC.</p>
+        
+        <p>Our mission is simple: to provide athletes of all levels with the tools they need to perform at their best. Whether you're a professional athlete or just starting your fitness journey, we've got you covered.</p>
+        
+        <div class="mission-vision">
+            <div class="mission">
+                <h2>Our Mission</h2>
+                <p>To revolutionize the fitness industry by providing innovative, high-performance equipment that helps people achieve their health and fitness goals. We believe everyone deserves access to quality gear regardless of their budget.</p>
+            </div>
+            
+            <div class="vision">
+                <h2>Our Vision</h2>
+                <p>To become the most trusted global fitness brand, recognized for our commitment to quality, customer satisfaction, and community building through sports and fitness.</p>
+            </div>
+        </div>
+        
+        <h2>Our Values</h2>
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li style="margin-bottom: 15px;"><strong>Quality First:</strong> Every product undergoes rigorous testing before reaching you</li>
+            <li style="margin-bottom: 15px;"><strong>Customer Focus:</strong> Your satisfaction is our top priority</li>
+            <li style="margin-bottom: 15px;"><strong>Innovation:</strong> Constantly seeking better solutions for athletes</li>
+            <li style="margin-bottom: 15px;"><strong>Community:</strong> Building a supportive fitness community</li>
+            <li style="margin-bottom: 15px;"><strong>Sustainability:</strong> Eco-friendly packaging and responsible sourcing</li>
+        </ul>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <h2>Meet Our Team</h2>
+        <p>The passionate individuals behind Athlix</p>
+        
+        <div class="team-members">
+            <div class="team-member">
+                <img src="https://scontent.fmnl30-3.fna.fbcdn.net/v/t39.30808-1/451011154_2720387711456216_1629116068961117510_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeH9dhYOzr9Yt2XPSepj0OSKtn6UEs_BcA22fpQSz8FwDVnZ1r-0MLs5PvqIbolbmAg17sv6eP6gtJ_SOWD8hVCQ&_nc_ohc=KaSK_YRTiAIQ7kNvwHAJoIo&_nc_oc=AdmEPFribyPh6KrgrSlLZU8QIzaxe5KgT5FuLxrlH7gUA9LJtkJHAU0wmzUA887C6xU&_nc_zt=24&_nc_ht=scontent.fmnl30-3.fna&_nc_gid=WbyxlfkJE8t8E5-sMU8bMw&oh=00_AfLhJn_Adf7cPKjc8rymg8r8J3PAY5r-MXXl96LppujLuQ&oe=683F98A2" alt="John Doe">
+                <div class="member-info">
+                    <h3>Jeric Esternon</h3>
+                    <p>Team Leader</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/obsjeric13"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <img src="https://scontent.fmnl30-1.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s200x200&_nc_cat=1&ccb=1-7&_nc_sid=136b72&_nc_eui2=AeGl60_A91gig8ofdEXusDqBWt9TLzuBU1Ba31MvO4FTUKBiGio233pZbTx_Hxx5giwF0YWWe8FQjDgvkq448YT7&_nc_ohc=OfOrodOyUDIQ7kNvwH-Xu8_&_nc_oc=Adl-EEGNOw1CTIdD8RXeXe7YXe8kiowtGn219UUgBgfjA4-5QGL2-4lDpPVnCCReTeo&_nc_zt=24&_nc_ht=scontent.fmnl30-1.fna&oh=00_AfJO9Pxw6WgpImBpj2uE1o4TPV83Klu9D-2dT-LURuqjSQ&oe=6861E03A" alt="Jane Smith">
+                <div class="member-info">
+                    <h3>Harry Aganan</h3>
+                    <p>Information Architect</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/harryxirb"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <img src="https://scontent.fmnl30-3.fna.fbcdn.net/v/t1.15752-9/447627072_435907922550963_6151568563483569144_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGfNlKJMmwGsdbVHgYCKFFCn6RQlEg3WjifpFCUSDdaOKq_yymSeJ7ZN-1prfksq4D9iC-e1EQK0ZgRwoGNNLOR&_nc_ohc=swKKG7t4mJYQ7kNvwEDaKcb&_nc_oc=AdmmVzg2fowJheNQTWv7Qcr29ROg_r_lx9ySi32KFjTK-7Hithh_7cajGOStMRxt_W4&_nc_zt=23&_nc_ht=scontent.fmnl30-3.fna&oh=03_Q7cD2QEJ1S60GTBQ-1ZnkHGGyBfMDRIn4IP14OhWXobcVw2sEQ&oe=6861FB3C" alt="Mike Johnson">
+                <div class="member-info">
+                    <h3>Mark Jobin Velasco</h3>
+                    <p>UI / UX Designer</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/mark.jobin.velasco.2025"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+
+                <div class="team-member">
+                <img src="https://scontent.fmnl30-1.fna.fbcdn.net/v/t39.30808-6/495019121_4012266929101397_5800900311982963556_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEeNXF8GBlciip23OgSwDqH4FflptFd-zHgV-Wm0V37MSQsI7ie21yCEkUUk0WaY9eKHUPwDOaruKplZKhWxzZZ&_nc_ohc=U_rnbdodgssQ7kNvwFxBVmq&_nc_oc=AdlLfz1nS2h_7tqsWZplNkt-a8DpvdpxamUANG0yhy1bPhIZyHk3GkuZNLtutIeWdTs&_nc_zt=23&_nc_ht=scontent.fmnl30-1.fna&_nc_gid=o0k_T468t9hqN2uDYPl6sg&oh=00_AfLfTaJxM2J4HrJGbESbXjWIFevSZk5zCGptbS0-nrGJvA&oe=684047F5" alt="Mike Johnson">
+                <div class="member-info">
+                    <h3>Daryl Corpuz</h3>
+                    <p> Frontend / Web Developer</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Shntaro"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+
+                <div class="team-member">
+                <img src="https://scontent.fmnl30-1.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s200x200&_nc_cat=1&ccb=1-7&_nc_sid=136b72&_nc_eui2=AeGl60_A91gig8ofdEXusDqBWt9TLzuBU1Ba31MvO4FTUKBiGio233pZbTx_Hxx5giwF0YWWe8FQjDgvkq448YT7&_nc_ohc=OfOrodOyUDIQ7kNvwH-Xu8_&_nc_oc=Adl-EEGNOw1CTIdD8RXeXe7YXe8kiowtGn219UUgBgfjA4-5QGL2-4lDpPVnCCReTeo&_nc_zt=24&_nc_ht=scontent.fmnl30-1.fna&oh=00_AfJO9Pxw6WgpImBpj2uE1o4TPV83Klu9D-2dT-LURuqjSQ&oe=6861E03A" alt="Mike Johnson">
+                <div class="member-info">
+                    <h3>Joross Magtibay</h3>
+                    <p>Content Manager</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Joross13"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+
+                        <div class="team-member">
+                <img src="https://scontent.fmnl30-3.fna.fbcdn.net/v/t39.30808-1/470678310_3952127788409313_1166549743369911329_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=101&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeGFC02Q5dYNNAVuByl7BblqFd7OTQGVI8oV3s5NAZUjyt2Lwy-GXrAfKl1nCOoukxlG-s9didZk22B6EzyMBo56&_nc_ohc=fGHw-bvXbbYQ7kNvwELvPTA&_nc_oc=Adk_VORGZN-osfZhJ2bcpOn-Yb2sJuH2ZdwfPCdLS7942BI-8cAYg8FdoN0ZM2KdJ0M&_nc_zt=24&_nc_ht=scontent.fmnl30-3.fna&_nc_gid=hblB9bfe15Dllsp6YW8zBw&oh=00_AfLnTRzA60CuHt7I9zHLGgW5CfFpsny1_eurHnXINWdWMw&oe=68402DAB" alt="Mike Johnson">
+                <div class="member-info">
+                    <h3>Peter Andaya</h3>
+                    <p>Developer</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/ItsSadface"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer Section -->
+<footer class="section-p1">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Products</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="Privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="footer-col combined-col">
+            <div class="follow-payment-container">
+                <div class="follow-us">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+                
+                <div class="payment-methods">
+                    <h4>Payment Methods</h4>
+                    <div class="payment-icons">
+                        <img src="https://brandlogos.net/wp-content/uploads/2024/01/gcash-logo_brandlogos.net_kiaqh.png" alt="GCash" title="GCash">
+                        <img src="https://play-lh.googleusercontent.com/iQ8f5plIFy9rrY46Q2TNRwq_8nCvh9LZVwytqMBpOEcfnIU3vTkICQ6L1-RInWS93oQg" alt="PayPal" title="PayPal">
+                        <img src="https://play-lh.googleusercontent.com/fdQjxsIO8BTLaw796rQPZtLEnGEV8OJZJBJvl8dFfZLZcGf613W93z7y9dFAdDhvfqw" alt="Maya" title="Maya">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2553/2553610.png" alt="Cash on Delivery" title="Cash on Delivery">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-col brand-col">
+            <div class="brand-name2">Athlix</div>
+            <p class="footer-slogan">Your Premium Fitness Destination</p>
+            <div class="newsletter">
+                <h4>Newsletter</h4>
+                <input type="email" placeholder="Your email address">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2025 Athlix. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

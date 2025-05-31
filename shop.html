@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlix Ecommerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-color: #00D1D1;
+            --primary-dark: #00B4B4;
+            --text-dark: #222;
+            --text-light: #465b52;
+            --white: #fff;
+            --gray-border: #ddd;
+            --gray-light: #777;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            width: 100%;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 50px;
+            line-height: 64px;
+            color: var(--text-dark);
+        }
+
+        h2 {
+            font-size: 46px;
+            line-height: 54px;
+            color: var(--text-dark);
+        }
+
+        h4 {
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        h6 {
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin: 15px 0 20px 0;
+        }
+
+        /* Product Listing Styles */
+        .product-listing {
+            padding: 60px 80px;
+            background: #f5f5f5;
+        }
+        
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 12px 25px;
+            background: white;
+            border: 1px solid var(--gray-border);
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .product-img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-category {
+            color: var(--primary-color);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .product-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Star Rating Styles */
+        .star-rating {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .star-rating .stars {
+            color: #FFD700;
+            font-size: 14px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .star-rating .stars::before {
+            content: "★★★★★";
+            opacity: 0.3;
+        }
+
+        .star-rating .stars span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .star-rating .stars span::before {
+            content: "★★★★★";
+            color: #FFD700;
+        }
+
+        .star-rating .rating-count {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-left: 5px;
+        }
+
+        /* Cart Badge */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            #header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-container {
+                width: 100%;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            #navbar {
+                margin-top: 15px;
+            }
+
+            .product-listing {
+                padding: 30px 20px;
+            }
+
+            .category-filters {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="header">
+        <div class="logo-container">
+            <a href="index.html"><img src="https://i.ibb.co/t7BjmhV/athlix-logo.jpg" class="logo" alt="Athlix"></a>
+            <span class="brand-name">Athlix</span>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-container">
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="shop.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+<li>
+  <a href="cart.html" style="position: relative;">
+    <i class="fa-solid fa-cart-shopping"></i> Cart
+    <span class="cart-badge" id="cart-count">0</span>
+  </a>
+</li>
+    <li><a href="login.html"><i class="fa-regular fa-user"></i> Log in</a></li> 
+            </ul>
+        </div>
+    </section>
+    
+    <section class="product-listing">
+        <h2>Our Products</h2>
+        <p>Browse our premium collection</p>
+        
+        <div class="category-filters">
+            <button class="filter-btn active" data-category="all">All Products</button>
+            <button class="filter-btn" data-category="fitness">Fitness Equipment</button>
+            <button class="filter-btn" data-category="sports">Sports Gear</button>
+            <button class="filter-btn" data-category="wellness">Wellness & Recovery</button>
+        </div>
+        
+        <div class="products-grid">
+            <!-- FITNESS EQUIPMENT (6 items) -->
+            <a href="details.html?id=premium-resistance-bands" class="product-card" data-category="fitness">
+                <img src="https://m.media-amazon.com/images/I/61SzyV-Se9L.jpg" alt="Resistance Bands" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Fitness Equipment</span>
+                    <h3 class="product-title">Premium Resistance Bands</h3>
+                    <div class="product-price">₱1,000.00</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.5 out of 5 stars">
+                            <span style="width: 90%;"></span>
+                        </div>
+                        <span class="rating-count">(24)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=adjustable-dumbbells" class="product-card" data-category="fitness">
+                <img src="https://www.sportshouse.ph/cdn/shop/products/Sportshouse_weights_dumbbell_1_CSI-FW031.jpg?v=1740038758" alt="Adjustable Dumbbells" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Fitness Equipment</span>
+                    <h3 class="product-title">Adjustable Dumbbells (5-25kg)</h3>
+                    <div class="product-price">₱4,450.00</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.8 out of 5 stars">
+                            <span style="width: 96%;"></span>
+                        </div>
+                        <span class="rating-count">(18)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=yoga-mat" class="product-card" data-category="fitness">
+                <img src="https://cdn.thewirecutter.com/wp-content/media/2024/07/yoga-mat-2048px-1653.jpg" alt="Yoga Mat" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Fitness Equipment</span>
+                    <h3 class="product-title">Premium Non-Slip Yoga Mat</h3>
+                    <div class="product-price">₱700.00</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.7 out of 5 stars">
+                            <span style="width: 94%;"></span>
+                        </div>
+                        <span class="rating-count">(32)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=cast-iron-kettlebell" class="product-card" data-category="fitness">
+                <img src="https://treadmillfactory.ca/cdn/shop/products/cik-24k_1.jpg?v=1618264262" alt="Kettlebell" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Fitness Equipment</span>
+                    <h3 class="product-title">Cast Iron Kettlebell</h3>
+                    <div class="product-price">₱5,250.00</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.9 out of 5 stars">
+                            <span style="width: 98%;"></span>
+                        </div>
+                        <span class="rating-count">(15)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=doorway-pullup-bar" class="product-card" data-category="fitness">
+                <img src="https://contents.mediadecathlon.com/p2720132/k$76d3883763ff88d1446684625996ae62/locking-door-mount-pull-up-bar-bt-150-70-cm-corength-8588490.jpg" alt="Pull-Up Bar" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Fitness Equipment</span>
+                    <h3 class="product-title">Doorway Pull-Up Bar</h3>
+                    <div class="product-price">₱1,749.50</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.6 out of 5 stars">
+                            <span style="width: 92%;"></span>
+                        </div>
+                        <span class="rating-count">(21)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=ab-wheel-roller" class="product-card" data-category="fitness">
+                <img src="https://physiosupplies.ie/cdn/shop/products/B0044S28JA.MAIN__25424_1024x1024.jpg?v=1600859042" alt="Ab Roller" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Fitness Equipment</span>
+                    <h3 class="product-title">Ab Wheel Roller with Knee Pad</h3>
+                    <div class="product-price">₱999.50</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.3 out of 5 stars">
+                            <span style="width: 86%;"></span>
+                        </div>
+                        <span class="rating-count">(12)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <!-- SPORTS GEAR (6 items) -->
+            <a href="details.html?id=basketball" class="product-card" data-category="sports">
+                <img src="https://www.spalding.com/dw/image/v2/ABAH_PRD/on/demandware.static/-/Sites-masterCatalog_SPALDING/default/dw10fb65ad/images/hi-res/76950__FRONT.jpg?sw=1598&sh=1982&sm=cut&sfrm=jpg" alt="Basketball" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Sports Gear</span>
+                    <h3 class="product-title">Professional Basketball (Size 7)</h3>
+                    <div class="product-price">₱2,499.50</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.5 out of 5 stars">
+                            <span style="width: 90%;"></span>
+                        </div>
+                        <span class="rating-count">(28)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=running-shoes" class="product-card" data-category="sports">
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT6sfY7WACst8qil6xXP4KmZKk3QZGV-AjkJNxjr6_tkrIDrYQRHQwdTkTey3IS_K3W8jMbZXvlr5uGv7nFi8fAGHwx1xlo6h9mkJgNpbW_4YXBbvaWNrkcgQ" alt="Running Shoes" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Sports Gear</span>
+                    <h3 class="product-title">Performance Running Shoes</h3>
+                    <div class="product-price">₱4,499.50</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.8 out of 5 stars">
+                            <span style="width: 96%;"></span>
+                        </div>
+                        <span class="rating-count">(45)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=tennis-racket" class="product-card" data-category="sports">
+                <img src="https://stigasports.centracdn.net/client/dynamic/images/5004_dde2769918-tennis-racket-supreme-black_blue-6202-0116-02-6202-0116-03-1-original.jpg" alt="Tennis Racket" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Sports Gear</span>
+                    <h3 class="product-title">Carbon Fiber Tennis Racket</h3>
+                    <div class="product-price">₱3,999.50</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.7 out of 5 stars">
+                            <span style="width: 94%;"></span>
+                        </div>
+                        <span class="rating-count">(19)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=soccer-ball" class="product-card" data-category="sports">
+                <img src="https://www.rarewaves.com/cdn/shop/files/orig_13460415_20887372_20250218074216_592x593.jpg?v=1746719510" alt="Soccer Ball" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Sports Gear</span>
+                    <h3 class="product-title">FIFA Quality Soccer Ball</h3>
+                    <div class="product-price">₱1,999.50</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.6 out of 5 stars">
+                            <span style="width: 92%;"></span>
+                        </div>
+                        <span class="rating-count">(37)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=golf-club-set" class="product-card" data-category="sports">
+                <img src="https://cdn.media.amplience.net/i/americangolf/394011-Fazer-CTR25-Package-Set-1" alt="Golf Set" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Sports Gear</span>
+                    <h3 class="product-title">Beginner Golf Club Set</h3>
+                    <div class="product-price">₱8,500.00</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.4 out of 5 stars">
+                            <span style="width: 88%;"></span>
+                        </div>
+                        <span class="rating-count">(8)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=anti-fog-swimming-goggles" class="product-card" data-category="sports">
+                <img src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/c947e10bdb1e99d1574956a83f011754.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp" alt="Swimming Goggles" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Sports Gear</span>
+                    <h3 class="product-title">Anti-Fog Swimming Goggles</h3>
+                    <div class="product-price">₱1,249.50</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.2 out of 5 stars">
+                            <span style="width: 84%;"></span>
+                        </div>
+                        <span class="rating-count">(14)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <!-- WELLNESS & RECOVERY (6 items) -->
+            <a href="details.html?id=high-density-foam-roller" class="product-card" data-category="wellness">
+                <img src="https://sportfitinc.com/wp-content/uploads/2021/11/thegridblack.jpg" alt="Foam Roller" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Wellness & Recovery</span>
+                    <h3 class="product-title">High-Density Foam Roller</h3>
+                    <div class="product-price">₱1,749.50</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.5 out of 5 stars">
+                            <span style="width: 90%;"></span>
+                        </div>
+                        <span class="rating-count">(22)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=deep-tissue-massage-gun" class="product-card" data-category="wellness">
+                <img src="https://akson.pl/wp-content/uploads/2023/01/Masazer-Tkanek-Glebokich-muscle-massager-pistolet-wibracyjny.jpg" alt="Massage Gun" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Wellness & Recovery</span>
+                    <h3 class="product-title">Deep Tissue Massage Gun</h3>
+                    <div class="product-price">₱2,500.00</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.9 out of 5 stars">
+                            <span style="width: 98%;"></span>
+                        </div>
+                        <span class="rating-count">(31)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=knee-compression-sleeves" class="product-card" data-category="wellness">
+                <img src="https://m.media-amazon.com/images/I/61kYH803XIL.jpg" alt="Compression Sleeves" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Wellness & Recovery</span>
+                    <h3 class="product-title">Knee Compression Sleeves</h3>
+                    <div class="product-price">₱300</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.3 out of 5 stars">
+                            <span style="width: 86%;"></span>
+                        </div>
+                        <span class="rating-count">(17)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=eco-yoga-blocks" class="product-card" data-category="wellness">
+                <img src="https://contents.mediadecathlon.com/p2832142/k$8f51deb28145f34988afd88b4e6fd7d0/foam-yoga-brick-dark-green-kimjaly-8916648.jpg" alt="Yoga Block" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Wellness & Recovery</span>
+                    <h3 class="product-title">Eco-Friendly Yoga Blocks</h3>
+                    <div class="product-price">₱600.00</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.7 out of 5 stars">
+                            <span style="width: 94%;"></span>
+                        </div>
+                        <span class="rating-count">(11)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+            
+            <a href="details.html?id=therapy-resistance-bands" class="product-card" data-category="wellness">
+                <img src="https://www.coresteady.com/cdn/shop/products/flatband-grey.jpg?v=1605912550" alt="Resistance Bands" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Wellness & Recovery</span>
+                    <h3 class="product-title">Therapy Resistance Bands Set</h3>
+                    <div class="product-price">₱250.00</div>
+                    <div class="star-rating">
+                        <div class="stars" title="4.4 out of 5 stars">
+                            <span style="width: 88%;"></span>
+                        </div>
+                        <span class="rating-count">(9)</span>
+                    </div>
+                    <button class="add-to-cart" type="button">Add to Cart</button>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+<!-- Footer Section -->
+<footer class="section-p1">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Products</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="Privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="footer-col combined-col">
+            <div class="follow-payment-container">
+                <div class="follow-us">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+                
+                <div class="payment-methods">
+                    <h4>Payment Methods</h4>
+                    <div class="payment-icons">
+                        <img src="https://brandlogos.net/wp-content/uploads/2024/01/gcash-logo_brandlogos.net_kiaqh.png" alt="GCash" title="GCash">
+                        <img src="https://play-lh.googleusercontent.com/iQ8f5plIFy9rrY46Q2TNRwq_8nCvh9LZVwytqMBpOEcfnIU3vTkICQ6L1-RInWS93oQg" alt="PayPal" title="PayPal">
+                        <img src="https://play-lh.googleusercontent.com/fdQjxsIO8BTLaw796rQPZtLEnGEV8OJZJBJvl8dFfZLZcGf613W93z7y9dFAdDhvfqw" alt="Maya" title="Maya">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2553/2553610.png" alt="Cash on Delivery" title="Cash on Delivery">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-col brand-col">
+            <div class="brand-name2">Athlix</div>
+            <p class="footer-slogan">Your Premium Fitness Destination</p>
+            <div class="newsletter">
+                <h4>Newsletter</h4>
+                <input type="email" placeholder="Your email address">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2025 Athlix. All Rights Reserved.</p>
+    </div>
+</footer>
+
+    <script>
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const productCard = this.closest('.product-card');
+                const productUrl = productCard.getAttribute('href');
+                const productId = productUrl.split('=')[1];
+                const product = {
+                    id: productId,
+                    title: productCard.querySelector('.product-title').textContent,
+                    category: productCard.querySelector('.product-category').textContent,
+                    price: productCard.querySelector('.product-price').textContent,
+                    image: productCard.querySelector('.product-img').src,
+                    quantity: 1
+                };
+                
+                // Get current cart or initialize empty array
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                
+                // Check if product already in cart
+                const existingItem = cart.find(item => item.id === product.id);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push(product);
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                // Update cart count
+                updateCartCount();
+                
+                // Show confirmation
+                alert(`${product.title} has been added to your cart!`);
+            });
+        });
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                
+                // Add animation
+                cartCount.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    cartCount.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            
+            // Filter functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const category = btn.dataset.category;
+                    
+                    // Filter products
+                    productCards.forEach(card => {
+                        if (category === 'all' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

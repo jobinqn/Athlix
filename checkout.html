@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlix - Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+
+        :root {
+            --primary-color: #00D1D1;
+            --primary-dark: #00B4B4;
+            --text-dark: #222;
+            --text-light: #465b52;
+            --white: #fff;
+            --gray-border: #ddd;
+            --gray-light: #777;
+        }
+
+                /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            width: 100%;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 50px;
+            line-height: 64px;
+            color: var(--text-dark);
+        }
+
+        h2 {
+            font-size: 46px;
+            line-height: 54px;
+            color: var(--text-dark);
+        }
+
+        h4 {
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        h6 {
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin: 15px 0 20px 0;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Checkout Styles */
+        .checkout-container {
+            padding: 60px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .checkout-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .checkout-header h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .checkout-content {
+            display: flex;
+            gap: 30px;
+        }
+
+        .checkout-form {
+            flex: 2;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .checkout-summary {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-border);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 209, 209, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid var(--gray-border);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+        }
+
+        .payment-method input {
+            margin-right: 15px;
+        }
+
+        .payment-method .icon {
+            margin-right: 15px;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .payment-method .details {
+            flex: 1;
+        }
+
+        .payment-method .details h4 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .payment-method .details p {
+            font-size: 14px;
+            color: var(--gray-light);
+            margin: 0;
+        }
+
+        .checkout-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .checkout-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkout-item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .checkout-item-details {
+            flex: 1;
+        }
+
+        .checkout-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .checkout-item-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+
+        .checkout-item-quantity {
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .summary-label {
+            color: var(--gray-light);
+        }
+
+        .summary-value {
+            font-weight: 600;
+        }
+
+        .total-row {
+            border-top: 1px solid var(--gray-border);
+            padding-top: 15px;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        .total-label {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .total-value {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .place-order-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .place-order-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .back-to-cart {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .back-to-cart:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <section id="header">
+        <div class="logo-container">
+            <a href="index.html"><img src="https://i.ibb.co/t7BjmhV/athlix-logo.jpg" class="logo" alt="Athlix"></a>
+            <span class="brand-name">Athlix</span>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-container">
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+<li>
+  <a href="cart.html" style="position: relative;">
+    <i class="fa-solid fa-cart-shopping"></i> Cart
+    <span class="cart-badge" id="cart-count">0</span>
+  </a>
+</li>
+<li><a href="login.html"><i class="fa-regular fa-user"></i> Log in</a></li> 
+
+            </ul>
+        </div>
+    </section>
+    
+    <!-- Checkout Content -->
+    <section class="checkout-container">
+        <div class="checkout-header">
+            <h2>Checkout</h2>
+            <p>Complete your purchase information</p>
+        </div>
+        
+        <div class="checkout-content">
+            <form id="checkout-form" class="checkout-form">
+                <!-- Shipping Information -->
+                <div class="form-section">
+                    <h3 class="section-title">Shipping Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" class="form-control" required>
+                            <div class="error-message" id="first-name-error">Please enter your first name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" class="form-control" required>
+                            <div class="error-message" id="last-name-error">Please enter your last name</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" class="form-control" required>
+                        <div class="error-message" id="address-error">Please enter your address</div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" class="form-control" required>
+                            <div class="error-message" id="city-error">Please enter your city</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">ZIP Code</label>
+                            <input type="text" id="zip" class="form-control" required>
+                            <div class="error-message" id="zip-error">Please enter your ZIP code</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                        <div class="error-message" id="phone-error">Please enter a valid phone number</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                        <div class="error-message" id="email-error">Please enter a valid email address</div>
+                    </div>
+                </div>
+                
+                <!-- Payment Method -->
+                <div class="form-section">
+                    <h3 class="section-title">Payment Method</h3>
+                    
+                    <div class="payment-method">
+                        <input type="radio" id="gcash" name="payment-method" value="gcash" checked>
+                        <div class="icon">
+                            <img src="https://brandlogos.net/wp-content/uploads/2024/01/gcash-logo_brandlogos.net_kiaqh.png" alt="GCash" style="width: 40px;">
+                        </div>
+                        <div class="details">
+                            <h4>GCash</h4>
+                            <p>Pay using your GCash account</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <input type="radio" id="paypal" name="payment-method" value="paypal">
+                        <div class="icon">
+                            <img src="https://play-lh.googleusercontent.com/iQ8f5plIFy9rrY46Q2TNRwq_8nCvh9LZVwytqMBpOEcfnIU3vTkICQ6L1-RInWS93oQg" alt="PayPal" style="width: 40px;">
+                        </div>
+                        <div class="details">
+                            <h4>PayPal</h4>
+                            <p>Pay using PayPal or credit card</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <input type="radio" id="cod" name="payment-method" value="cod">
+                        <div class="icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="details">
+                            <h4>Cash on Delivery</h4>
+                            <p>Pay when you receive your order</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="place-order-btn">Place Order</button>
+                <a href="cart.html" class="back-to-cart"><i class="fas fa-arrow-left"></i> Back to Cart</a>
+            </form>
+            
+            <div class="checkout-summary">
+                <h3 class="section-title">Order Summary</h3>
+                
+                <div id="checkout-items">
+                    <!-- Items will be dynamically inserted here -->
+                </div>
+                
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value" id="checkout-subtotal">₱0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Shipping</span>
+                    <span class="summary-value">₱150.00</span>
+                </div>
+                <div class="summary-row total-row">
+                    <span class="total-label">Total</span>
+                    <span class="total-value" id="checkout-total">₱0.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<!-- Footer Section -->
+<footer class="section-p1">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Products</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="Privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="footer-col combined-col">
+            <div class="follow-payment-container">
+                <div class="follow-us">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+                
+                <div class="payment-methods">
+                    <h4>Payment Methods</h4>
+                    <div class="payment-icons">
+                        <img src="https://brandlogos.net/wp-content/uploads/2024/01/gcash-logo_brandlogos.net_kiaqh.png" alt="GCash" title="GCash">
+                        <img src="https://play-lh.googleusercontent.com/iQ8f5plIFy9rrY46Q2TNRwq_8nCvh9LZVwytqMBpOEcfnIU3vTkICQ6L1-RInWS93oQg" alt="PayPal" title="PayPal">
+                        <img src="https://play-lh.googleusercontent.com/fdQjxsIO8BTLaw796rQPZtLEnGEV8OJZJBJvl8dFfZLZcGf613W93z7y9dFAdDhvfqw" alt="Maya" title="Maya">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2553/2553610.png" alt="Cash on Delivery" title="Cash on Delivery">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-col brand-col">
+            <div class="brand-name2">Athlix</div>
+            <p class="footer-slogan">Your Premium Fitness Destination</p>
+            <div class="newsletter">
+                <h4>Newsletter</h4>
+                <input type="email" placeholder="Your email address">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2025 Athlix. All Rights Reserved.</p>
+    </div>
+</footer>
+
+    <script>
+        // Load cart items and display them
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            updateCheckoutDisplay(cart);
+            
+            // Update cart count in header
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            }
+            
+            // Form validation
+            const form = document.getElementById('checkout-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    // In a real application, you would process the order here
+                    alert('Order placed successfully! Thank you for your purchase.');
+                    // Clear the cart
+                    localStorage.removeItem('cart');
+                    // Redirect to confirmation page or home
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            // Input validation on blur
+            document.getElementById('first-name').addEventListener('blur', validateFirstName);
+            document.getElementById('last-name').addEventListener('blur', validateLastName);
+            document.getElementById('address').addEventListener('blur', validateAddress);
+            document.getElementById('city').addEventListener('blur', validateCity);
+            document.getElementById('zip').addEventListener('blur', validateZip);
+            document.getElementById('phone').addEventListener('blur', validatePhone);
+            document.getElementById('email').addEventListener('blur', validateEmail);
+        });
+        
+        // Function to update checkout display
+        function updateCheckoutDisplay(cart) {
+            const checkoutItemsContainer = document.getElementById('checkout-items');
+            
+            if (cart.length === 0) {
+                // If cart is empty, redirect back to cart page
+                window.location.href = 'cart.html';
+                return;
+            }
+            
+            // Show cart items
+            checkoutItemsContainer.innerHTML = '';
+            cart.forEach(item => {
+                const itemTotal = parseFloat(item.price.replace(/[^0-9.]/g, '')) * item.quantity;
+                checkoutItemsContainer.innerHTML += `
+                    <div class="checkout-item">
+                        <img src="${item.image}" alt="${item.title}" class="checkout-item-img">
+                        <div class="checkout-item-details">
+                            <h3 class="checkout-item-title">${item.title}</h3>
+                            <p class="checkout-item-price">${item.price}</p>
+                            <p class="checkout-item-quantity">Quantity: ${item.quantity}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Update totals
+            updateCheckoutSummary(cart);
+        }
+        
+        // Function to update checkout summary
+        function updateCheckoutSummary(cart) {
+            const subtotal = cart.reduce((total, item) => {
+                return total + (parseFloat(item.price.replace(/[^0-9.]/g, '')) * item.quantity);
+            }, 0);
+            
+            const shipping = 150; // Fixed shipping fee
+            const total = subtotal + shipping;
+            
+            document.getElementById('checkout-subtotal').textContent = `₱${subtotal.toFixed(2)}`;
+            document.getElementById('checkout-total').textContent = `₱${total.toFixed(2)}`;
+        }
+        
+        // Form validation functions
+        function validateForm() {
+            let isValid = true;
+            
+            isValid = validateFirstName() && isValid;
+            isValid = validateLastName() && isValid;
+            isValid = validateAddress() && isValid;
+            isValid = validateCity() && isValid;
+            isValid = validateZip() && isValid;
+            isValid = validatePhone() && isValid;
+            isValid = validateEmail() && isValid;
+            
+            return isValid;
+        }
+        
+        function validateFirstName() {
+            const input = document.getElementById('first-name');
+            const error = document.getElementById('first-name-error');
+            
+            if (input.value.trim() === '') {
+                error.style.display = 'block';
+                input.style.borderColor = '#dc3545';
+                return false;
+            } else {
+                error.style.display = 'none';
+                input.style.borderColor = '#ddd';
+                return true;
+            }
+        }
+        
+        function validateLastName() {
+            const input = document.getElementById('last-name');
+            const error = document.getElementById('last-name-error');
+            
+            if (input.value.trim() === '') {
+                error.style.display = 'block';
+                input.style.borderColor = '#dc3545';
+                return false;
+            } else {
+                error.style.display = 'none';
+                input.style.borderColor = '#ddd';
+                return true;
+            }
+        }
+        
+        function validateAddress() {
+            const input = document.getElementById('address');
+            const error = document.getElementById('address-error');
+            
+            if (input.value.trim() === '') {
+                error.style.display = 'block';
+                input.style.borderColor = '#dc3545';
+                return false;
+            } else {
+                error.style.display = 'none';
+                input.style.borderColor = '#ddd';
+                return true;
+            }
+        }
+        
+        function validateCity() {
+            const input = document.getElementById('city');
+            const error = document.getElementById('city-error');
+            
+            if (input.value.trim() === '') {
+                error.style.display = 'block';
+                input.style.borderColor = '#dc3545';
+                return false;
+            } else {
+                error.style.display = 'none';
+                input.style.borderColor = '#ddd';
+                return true;
+            }
+        }
+        
+        function validateZip() {
+            const input = document.getElementById('zip');
+            const error = document.getElementById('zip-error');
+            
+            if (input.value.trim() === '' || !/^\d+$/.test(input.value)) {
+                error.style.display = 'block';
+                input.style.borderColor = '#dc3545';
+                return false;
+            } else {
+                error.style.display = 'none';
+                input.style.borderColor = '#ddd';
+                return true;
+            }
+        }
+        
+        function validatePhone() {
+            const input = document.getElementById('phone');
+            const error = document.getElementById('phone-error');
+            
+            if (input.value.trim() === '' || !/^[\d\s\-()+]+$/.test(input.value)) {
+                error.style.display = 'block';
+                input.style.borderColor = '#dc3545';
+                return false;
+            } else {
+                error.style.display = 'none';
+                input.style.borderColor = '#ddd';
+                return true;
+            }
+        }
+        
+        function validateEmail() {
+            const input = document.getElementById('email');
+            const error = document.getElementById('email-error');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (input.value.trim() === '' || !emailRegex.test(input.value)) {
+                error.style.display = 'block';
+                input.style.borderColor = '#dc3545';
+                return false;
+            } else {
+                error.style.display = 'none';
+                input.style.borderColor = '#ddd';
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

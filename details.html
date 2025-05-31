@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Athlix</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-color: #00D1D1;
+            --primary-dark: #00B4B4;
+            --text-dark: #222;
+            --text-light: #465b52;
+            --white: #fff;
+            --gray-border: #ddd;
+            --gray-light: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            width: 100%;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 50px;
+            line-height: 64px;
+            color: var(--text-dark);
+        }
+
+        h2 {
+            font-size: 46px;
+            line-height: 54px;
+            color: var(--text-dark);
+        }
+
+        h3 {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        h6 {
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin: 15px 0 20px 0;
+        }
+
+        /* Star Rating Styles */
+        .star-rating {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .star-rating .stars {
+            color: #FFD700;
+            font-size: 14px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .star-rating .stars::before {
+            content: "★★★★★";
+            opacity: 0.3;
+        }
+
+        .star-rating .stars span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .star-rating .stars span::before {
+            content: "★★★★★";
+            color: #FFD700;
+        }
+
+        .star-rating .rating-count {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-left: 5px;
+        }
+
+        /* Product Details Styles */
+        .product-details {
+            display: flex;
+            padding: 60px 80px;
+            background: #f5f5f5;
+            flex-wrap: wrap;
+        }
+
+        .product-images {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 30px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid var(--gray-border);
+            transition: all 0.3s ease;
+        }
+
+        .thumbnail:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .product-info {
+            flex: 1;
+            padding-left: 40px;
+            min-width: 300px;
+        }
+
+        .product-category {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .product-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .product-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .product-features {
+            margin-bottom: 30px;
+        }
+
+        .product-features h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .product-features ul {
+            list-style-position: inside;
+            color: var(--text-light);
+        }
+
+        .product-features li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .product-features li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .product-specs {
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .spec-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .spec-value {
+            color: var(--text-light);
+            text-align: right;
+        }
+
+        /* Color Selector Styles */
+        .color-selector {
+            display: none;
+            margin-bottom: 25px;
+        }
+
+        .color-selector h4 {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.selected {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary-color);
+        }
+
+        .color-option .color-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-dark);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.2s ease;
+            margin-bottom: 5px;
+        }
+
+        .color-option:hover .color-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .quantity-selector button {
+            width: 30px;
+            height: 30px;
+            background: var(--gray-border);
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-selector button:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .quantity-selector input {
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid var(--gray-border);
+            margin: 0 10px;
+        }
+
+        .add-to-cart {
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Related Products */
+        .related-products {
+            padding: 0 80px 60px;
+            background: #f5f5f5;
+        }
+
+        .related-products h2 {
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .related-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .related-card:hover .related-img {
+            transform: scale(1.05);
+        }
+
+        .related-info {
+            padding: 15px;
+        }
+
+        .related-category {
+            color: var(--primary-color);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .related-title {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .related-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+
+        /* Review Section */
+        .reviews-section {
+            padding: 0 80px 60px;
+            background: #f5f5f5;
+        }
+
+        .reviews-section h2 {
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .review-date {
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        .review-content {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Cart Badge */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-container {
+                width: 100%;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .product-details {
+                padding: 30px 20px;
+                flex-direction: column;
+            }
+
+            .product-info {
+                padding-left: 0;
+                margin-top: 30px;
+            }
+
+            .main-image {
+                height: 350px;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .related-products,
+            .reviews-section {
+                padding: 0 20px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="header">
+        <div class="logo-container">
+            <a href="index.html"><img src="https://i.ibb.co/t7BjmhV/athlix-logo.jpg" class="logo" alt="Athlix"></a>
+            <span class="brand-name">Athlix</span>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-container">
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+<li>
+  <a href="cart.html" style="position: relative;">
+    <i class="fa-solid fa-cart-shopping"></i> Cart
+    <span class="cart-badge" id="cart-count">0</span>
+  </a>
+</li>
+    <li><a href="login.html"><i class="fa-regular fa-user"></i> Log in</a></li> 
+            </ul>
+        </div>
+    </section>
+    
+    <section class="product-details">
+        <div class="product-images">
+            <img id="main-image" src="" alt="" class="main-image">
+            <div class="thumbnail-container" id="thumbnail-container"></div>
+        </div>
+        
+        <div class="product-info">
+            <span class="product-category"></span>
+            <h1 class="product-title"></h1>
+            <div class="product-price"></div>
+            
+            <div class="star-rating">
+                <div class="stars">
+                    <span style="width: 80%"></span>
+                </div>
+                <span class="rating-count">(24 reviews)</span>
+            </div>
+            
+            <p class="product-description"></p>
+            
+            <div class="product-features">
+                <h4>Key Features:</h4>
+                <ul id="features-list"></ul>
+            </div>
+            
+            <div class="product-specs" id="product-specs">
+                <h3>Specifications</h3>
+                <div class="specs-grid" id="specs-grid"></div>
+            </div>
+
+            <!-- Color Selector -->
+            <div class="color-selector" id="color-selector">
+                <h4>Color:</h4>
+                <div class="color-options" id="color-options"></div>
+            </div>
+            
+            <div class="quantity-selector">
+                <button onclick="decreaseQuantity()">-</button>
+                <input type="number" id="quantity" value="1" min="1">
+                <button onclick="increaseQuantity()">+</button>
+            </div>
+            
+            <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <h2>Customer Reviews</h2>
+        <div id="reviews-container"></div>
+    </section>
+    
+    <section class="related-products">
+        <h2>You May Also Like</h2>
+        <div class="related-grid" id="related-grid"></div>
+    </section>
+    
+<!-- Footer Section -->
+<footer class="section-p1">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Products</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="Privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="footer-col combined-col">
+            <div class="follow-payment-container">
+                <div class="follow-us">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+                
+                <div class="payment-methods">
+                    <h4>Payment Methods</h4>
+                    <div class="payment-icons">
+                        <img src="https://brandlogos.net/wp-content/uploads/2024/01/gcash-logo_brandlogos.net_kiaqh.png" alt="GCash" title="GCash">
+                        <img src="https://play-lh.googleusercontent.com/iQ8f5plIFy9rrY46Q2TNRwq_8nCvh9LZVwytqMBpOEcfnIU3vTkICQ6L1-RInWS93oQg" alt="PayPal" title="PayPal">
+                        <img src="https://play-lh.googleusercontent.com/fdQjxsIO8BTLaw796rQPZtLEnGEV8OJZJBJvl8dFfZLZcGf613W93z7y9dFAdDhvfqw" alt="Maya" title="Maya">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2553/2553610.png" alt="Cash on Delivery" title="Cash on Delivery">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-col brand-col">
+            <div class="brand-name2">Athlix</div>
+            <p class="footer-slogan">Your Premium Fitness Destination</p>
+            <div class="newsletter">
+                <h4>Newsletter</h4>
+                <input type="email" placeholder="Your email address">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2025 Athlix. All Rights Reserved.</p>
+    </div>
+</footer>
+
+    <script>
+        // Product data matching the products from shop.html
+        const products = {
+            "premium-resistance-bands": {
+                name: "Premium Resistance Bands",
+                category: "Fitness Equipment",
+                price: "₱1000.00",
+                image: "https://m.media-amazon.com/images/I/61SzyV-Se9L.jpg",
+                thumbnails: [
+                    "https://m.media-amazon.com/images/I/61SzyV-Se9L.jpg",
+                    "https://blackmountainproducts.com/wp-content/uploads/2015/04/92.jpg",
+                    "https://metcongroupph.com/cdn/shop/files/d997391c61cd840e3d506efe47bc78f7_1200x1200.webp?v=1717657443",
+                    "https://totalsports.ph/cdn/shop/products/power-band-lvl-4.jpg?v=1659580055&width=1445"
+                ],
+                features: [
+                    "5 resistance levels: X-Light, Light, Medium, Heavy, X-Heavy",
+                    "Made from 100% natural latex for durability",
+                    "Includes door anchor, ankle straps, and carrying bag",
+                    "Supports up to 150 lbs of resistance",
+                    "Perfect for strength training, physical therapy, and mobility work",
+                    "Non-slip texture for secure grip during workouts"
+                ],
+                description: "Our premium resistance bands set is perfect for full-body workouts at home or at the gym. Made from high-quality natural latex, these bands provide varying levels of resistance to accommodate all fitness levels.",
+                specs: {
+                    "Material": "Natural Latex",
+                    "Resistance Levels": "5",
+                    "Max Resistance": "150 lbs",
+                    "Included Accessories": "Door anchor, ankle straps, carrying bag"
+                },
+                colors: [
+                    { name: "Black", code: "#000000", image: "https://m.media-amazon.com/images/I/61SzyV-Se9L.jpg" },
+                    { name: "Blue", code: "#0000FF", image: "https://blackmountainproducts.com/wp-content/uploads/2015/04/92.jpg" },
+                    { name: "Pink", code: "#FFC0CB", image: "https://metcongroupph.com/cdn/shop/files/d997391c61cd840e3d506efe47bc78f7_1200x1200.webp?v=1717657443" },
+                    { name: "Green", code: "#008000", image: "https://totalsports.ph/cdn/shop/products/power-band-lvl-4.jpg?v=1659580055&width=1445" }
+                ]
+            },
+            "adjustable-dumbbells": {
+                name: "Adjustable Dumbbells (5-25kg)",
+                category: "Fitness Equipment",
+                price: "₱4450.00",
+                image: "https://www.sportshouse.ph/cdn/shop/products/Sportshouse_weights_dumbbell_1_CSI-FW031.jpg?v=1740038758",
+                thumbnails: [
+                    "https://www.sportshouse.ph/cdn/shop/products/Sportshouse_weights_dumbbell_1_CSI-FW031.jpg?v=1740038758",
+                ],
+                features: [
+                    "Adjustable weight from 5kg to 25kg",
+                    "Space-saving design",
+                    "Quick-change weight system",
+                    "Ergonomic handles for comfortable grip",
+                    "Durable cast iron construction"
+                ],
+                description: "These adjustable dumbbells provide a complete weight set in one compact unit, perfect for home gyms with limited space.",
+                specs: {
+                    "Weight Range": "5-25kg",
+                    "Material": "Cast Iron",
+                    "Adjustment Mechanism": "Dial system",
+                    "Dimensions": "45cm x 15cm x 15cm"
+                },
+            },
+            "cast-iron-kettlebell": {
+                name: "Cast Iron Kettlebell",
+                category: "Fitness Equipment",
+                price: "₱5250.00",
+                image: "https://treadmillfactory.ca/cdn/shop/products/cik-24k_1.jpg?v=1618264262",
+                thumbnails: [
+                    "https://treadmillfactory.ca/cdn/shop/products/cik-24k_1.jpg?v=1618264262",
+                ],
+                features: [
+                    "Made from durable cast iron construction",
+                    "Textured handle for secure grip",
+                    "Perfect for swings, squats, and presses",
+                    "Available in multiple weight options",
+                    "Even weight distribution for smooth movements",
+                    "Rust-resistant coating for longevity"
+                ],
+                description: "Our professional-grade cast iron kettlebell is designed for serious strength training. The balanced design allows for smooth swinging motions while the textured handle ensures a secure grip during intense workouts.",
+                specs: {
+                    "Material": "Cast Iron",
+                    "Weight Options": "8kg, 12kg, 16kg, 20kg, 24kg",
+                    "Handle Diameter": "35mm",
+                    "Surface": "Textured powder coat",
+                    "Base Diameter": "140mm"
+                },
+            },
+            "doorway-pullup-bar": {
+                name: "Doorway Pull-Up Bar",
+                category: "Fitness Equipment",
+                price: "₱1749.50",
+                image: "https://contents.mediadecathlon.com/p2720132/k$76d3883763ff88d1446684625996ae62/locking-door-mount-pull-up-bar-bt-150-70-cm-corength-8588490.jpg",
+                thumbnails: [
+                    "https://contents.mediadecathlon.com/p2720132/k$76d3883763ff88d1446684625996ae62/locking-door-mount-pull-up-bar-bt-150-70-cm-corength-8588490.jpg",
+                ],
+                features: [
+                    "Fits most standard door frames (70-100cm)",
+                    "No drilling or permanent installation required",
+                    "Heavy-duty steel construction supports up to 150kg",
+                    "Foam-padded grips for comfort",
+                    "Multi-grip design for varied workouts",
+                    "Quick and easy to install/remove"
+                ],
+                description: "This versatile doorway pull-up bar provides a complete upper body workout without requiring permanent installation. The secure locking mechanism ensures stability during intense training sessions while the padded grips protect your hands and door frame.",
+                specs: {
+                    "Material": "Steel with foam padding",
+                    "Weight Capacity": "150kg",
+                    "Door Width Range": "70-100cm",
+                    "Bar Length": "70cm",
+                    "Grip Options": "Wide, narrow, and neutral positions"
+                },
+            },
+            "ab-wheel-roller": {
+                name: "Ab Wheel Roller with Knee Pad",
+                category: "Fitness Equipment",
+                price: "₱999.50",
+                image: "https://physiosupplies.ie/cdn/shop/products/B0044S28JA.MAIN__25424_1024x1024.jpg?v=1600859042",
+                thumbnails: [
+                    "https://physiosupplies.ie/cdn/shop/products/B0044S28JA.MAIN__25424_1024x1024.jpg?v=1600859042",
+                ],
+                features: [
+                    "Dual-wheel design for stability",
+                    "Includes thick foam knee pad for comfort",
+                    "Non-slip rubber handles",
+                    "Steel frame with durable coating",
+                    "Improves core strength and stability",
+                    "Compact for easy storage"
+                ],
+                description: "This professional ab wheel roller set includes a comfortable knee pad and dual wheels for maximum stability during your core workouts. The ergonomic handles and smooth-rolling wheels make it perfect for developing abdominal strength and improving core stability.",
+                specs: {
+                    "Material": "Steel frame with rubber wheels",
+                    "Wheel Diameter": "10cm",
+                    "Handle Length": "15cm",
+                    "Knee Pad Dimensions": "30x20x2cm",
+                    "Weight Capacity": "150kg",
+                    "Included Accessories": "Foam knee pad"
+                },
+            },
+            "yoga-mat": {
+                name: "Premium Non-Slip Yoga Mat",
+                category: "Fitness Equipment",
+                price: "₱700.00",
+                image: "https://cdn.thewirecutter.com/wp-content/media/2024/07/yoga-mat-2048px-1653.jpg",
+                thumbnails: [
+                    "https://cdn.thewirecutter.com/wp-content/media/2024/07/yoga-mat-2048px-1653.jpg",
+                    "https://beanproducts.com/cdn/shop/products/30MPYPE_3_2400x.jpg?v=1606317595",
+                    "https://beanproducts.com/cdn/shop/products/30MPYTL_2_800x.jpg?v=1606317595"
+                ],
+                features: [
+                    "Extra thick for joint support",
+                    "Non-slip surface",
+                    "Eco-friendly materials",
+                    "Includes carrying strap",
+                    "Available in multiple colors"
+                ],
+                description: "Our premium yoga mat provides superior cushioning and grip for all types of yoga practice, from gentle to intense hot yoga sessions.",
+                specs: {
+                    "Thickness": "6mm",
+                    "Material": "Eco-friendly TPE",
+                    "Dimensions": "183cm x 61cm",
+                    "Weight": "1.2kg"
+                },
+                colors: [
+                    { name: "Purple", code: "#A020F0", image: "https://beanproducts.com/cdn/shop/products/30MPYPE_3_2400x.jpg?v=1606317595" },
+                    { name: "Gray", code: "#808080", image: "https://cdn.thewirecutter.com/wp-content/media/2024/07/yoga-mat-2048px-1653.jpg" },
+                    { name: "Green", code: "#008000", image: "https://beanproducts.com/cdn/shop/products/30MPYTL_2_800x.jpg?v=1606317595" },
+                ]
+            },
+            "basketball": {
+                name: "Professional Basketball",
+                category: "Sports Gear",
+                price: "₱2499.50",
+                image: "https://www.spalding.com/dw/image/v2/ABAH_PRD/on/demandware.static/-/Sites-masterCatalog_SPALDING/default/dw10fb65ad/images/hi-res/76950__FRONT.jpg?sw=1598&sh=1982&sm=cut&sfrm=jpg",
+                thumbnails: [
+                    "https://www.spalding.com/dw/image/v2/ABAH_PRD/on/demandware.static/-/Sites-masterCatalog_SPALDING/default/dw10fb65ad/images/hi-res/76950__FRONT.jpg?sw=1598&sh=1982&sm=cut&sfrm=jpg",
+                ],
+                features: [
+                    "Official size and weight",
+                    "Composite leather cover",
+                    "Deep channels for better grip",
+                    "Indoor/outdoor use",
+                    "FIBA approved"
+                ],
+                description: "This professional-grade basketball meets all official specifications for competitive play with superior grip and durability.",
+                specs: {
+                    "Size": "7 (29.5 inches)",
+                    "Weight": "22 oz",
+                    "Material": "Composite leather",
+                    "Pressure": "7-9 PSI"
+                },
+            },
+            "running-shoes": {
+                name: "Performance Running Shoes",
+                category: "Sports Gear",
+                price: "₱4499.50",
+                image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT6sfY7WACst8qil6xXP4KmZKk3QZGV-AjkJNxjr6_tkrIDrYQRHQwdTkTey3IS_K3W8jMbZXvlr5uGv7nFi8fAGHwx1xlo6h9mkJgNpbW_4YXBbvaWNrkcgQ",
+                thumbnails: [
+                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT6sfY7WACst8qil6xXP4KmZKk3QZGV-AjkJNxjr6_tkrIDrYQRHQwdTkTey3IS_K3W8jMbZXvlr5uGv7nFi8fAGHwx1xlo6h9mkJgNpbW_4YXBbvaWNrkcgQ",
+                ],
+                features: [
+                    "Breathable mesh upper",
+                    "Responsive cushioning",
+                    "Durable rubber outsole",
+                    "Lightweight design",
+                    "Arch support technology"
+                ],
+                description: "These performance running shoes are designed for both casual joggers and serious runners, offering superior comfort and support.",
+                specs: {
+                    "Material": "Mesh/Synthetic",
+                    "Weight": "9 oz",
+                    "Drop": "8mm",
+                    "Best For": "Road running"
+                },
+            },
+            "tennis-racket": {
+                name: "Carbon Fiber Tennis Racket",
+                category: "Sports Gear",
+                price: "₱3999.50",
+                image: "https://stigasports.centracdn.net/client/dynamic/images/5004_dde2769918-tennis-racket-supreme-black_blue-6202-0116-02-6202-0116-03-1-original.jpg",
+                thumbnails: [
+                    "https://stigasports.centracdn.net/client/dynamic/images/5004_dde2769918-tennis-racket-supreme-black_blue-6202-0116-02-6202-0116-03-1-original.jpg",
+                ],
+                features: [
+                    "Carbon fiber construction",
+                    "Pre-strung with durable strings",
+                    "Shock-absorbing grip",
+                    "Balanced weight distribution",
+                    "Includes protective cover"
+                ],
+                description: "This professional-grade tennis racket offers excellent control and power, suitable for players of all skill levels.",
+                specs: {
+                    "Head Size": "100 sq in",
+                    "Weight": "300g",
+                    "Grip Size": "4 3/8 inches",
+                    "String Pattern": "16x19"
+                },
+            },
+    "soccer-ball": {
+    name: "Professional Match Soccer Ball",
+    category: "Sports Gear",
+    price: "₱1999.50",
+    image: "https://www.rarewaves.com/cdn/shop/files/orig_13460415_20887372_20250218074216_592x593.jpg?v=1746719510",
+    thumbnails: [
+        "https://www.rarewaves.com/cdn/shop/files/orig_13460415_20887372_20250218074216_592x593.jpg?v=1746719510",
+    ],
+    features: [
+        "FIFA Quality Pro certified",
+        "High-performance polyurethane cover",
+        "Butyl bladder for optimal air retention",
+        "Machine-stitched for durability",
+        "Perfect for professional matches and training"
+    ],
+    description: "Our professional match soccer ball meets the highest standards for competitive play, offering excellent touch, flight stability, and durability for all playing surfaces.",
+    specs: {
+        "Size": "5 (Standard)",
+        "Circumference": "68-70 cm",
+        "Weight": "410-450g",
+        "Pressure": "8-16 PSI",
+        "Cover Material": "Polyurethane",
+        "Bladder Type": "Butyl"
+    },
+    },
+    "golf-club-set": {
+    name: "Premium Titanium Golf Club Set",
+    category: "Sports Gear",
+    price: "₱8500.00",
+    image: "https://cdn.media.amplience.net/i/americangolf/394011-Fazer-CTR25-Package-Set-1",
+    thumbnails: [
+        "https://cdn.media.amplience.net/i/americangolf/394011-Fazer-CTR25-Package-Set-1",
+    ],
+    features: [
+        "Complete 14-piece set with titanium driver",
+        "Forged stainless steel irons (4-PW)",
+        "Mallet-style putter with alignment aid",
+        "Lightweight graphite shafts for woods",
+        "Steel shafts for irons/wedges",
+        "Includes premium stand bag with dual straps",
+        "Head covers for woods included"
+    ],
+    description: "This complete golf club set offers premium performance for players of all skill levels. The titanium driver provides exceptional distance, while the forged irons deliver precision control. The set comes with a stylish and functional stand bag for easy transportation on the course.",
+    specs: {
+        "Club Composition": "Driver, 3 Wood, 5 Wood, 4 Hybrid, 5-PW Irons, SW, Putter",
+        "Driver Material": "Titanium face with composite crown",
+        "Iron Material": "Forged stainless steel",
+        "Shaft Material": "Graphite (woods), Steel (irons/wedges)",
+        "Flex Options": "Regular, Stiff",
+        "Grip Type": "Premium rubber with alignment markings",
+        "Bag Pockets": "7 (including insulated cooler pocket)",
+        "Bag Weight": "4.5 lbs"
+    },
+},
+
+"anti-fog-swimming-goggles": {
+    name: "Anti-Fog Swimming Goggles",
+    category: "Swimming Gear",
+    price: "₱1249.50",
+    image: "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/c947e10bdb1e99d1574956a83f011754.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp",
+    thumbnails: [
+        "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/c947e10bdb1e99d1574956a83f011754.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp",
+    ],
+    features: [
+        "Advanced anti-fog coating technology",
+        "UV protection (100% UVA/UVB blocking)",
+        "Silicone double-seal gasket for leak-proof fit",
+        "Adjustable nose bridge for custom fit",
+        "Soft hypoallergenic silicone frame",
+        "Wide peripheral vision design",
+        "Mirrored lenses reduce glare"
+    ],
+    description: "Our premium anti-fog swimming goggles provide crystal clear vision throughout your swim. The advanced coating prevents fogging while the comfortable silicone seal creates a watertight fit without uncomfortable pressure. Perfect for competitive swimming or recreational use.",
+    specs: {
+        "Lens Type": "Polycarbonate with anti-fog coating",
+        "UV Protection": "100% UVA/UVB",
+        "Frame Material": "Hypoallergenic silicone",
+        "Strap Type": "Adjustable silicone",
+        "Nose Bridge": "Adjustable with 3 size options",
+        "Recommended Use": "Competition, Training, Recreation"
+    },
+},
+
+"high-density-foam-roller": {
+    name: "High-Density Foam Roller",
+    category: "Fitness Equipment",
+    price: "₱1749.50",
+    image: "https://sportfitinc.com/wp-content/uploads/2021/11/thegridblack.jpg",
+    thumbnails: [
+        "https://sportfitinc.com/wp-content/uploads/2021/11/thegridblack.jpg",
+    ],
+    features: [
+        "Extra firm EPP foam construction",
+        "Textured surface for deep muscle stimulation",
+        "36-inch length for full-body use",
+        "Supports up to 300 lbs body weight",
+        "Improves flexibility and circulation",
+        "Relieves muscle tension and soreness",
+        "Helps break up muscle knots and adhesions"
+    ],
+    description: "Our professional-grade high-density foam roller provides deep tissue massage to help with muscle recovery, flexibility, and pain relief. The extra firm EPP foam maintains its shape over time while the textured surface targets trigger points effectively. Ideal for athletes, physical therapy, and post-workout recovery.",
+    specs: {
+        "Material": "EPP (Expanded Polypropylene) Foam",
+        "Density": "High (Extra Firm)",
+        "Dimensions": "36\" x 6\" diameter",
+        "Weight Capacity": "300 lbs",
+        "Surface Texture": "3D grid pattern",
+        "Weight": "1.2 kg"
+    },
+},
+
+"deep-tissue-massage-gun": {
+    name: "Deep Tissue Massage Gun",
+    category: "Fitness & Recovery",
+    price: "₱2,500.00",
+    image: "https://akson.pl/wp-content/uploads/2023/01/Masazer-Tkanek-Glebokich-muscle-massager-pistolet-wibracyjny.jpg",
+    thumbnails: [
+        "https://akson.pl/wp-content/uploads/2023/01/Masazer-Tkanek-Glebokich-muscle-massager-pistolet-wibracyjny.jpg",
+    ],
+    features: [
+        "Powerful 3200 RPM percussive therapy",
+        "6 interchangeable massage heads",
+        "5 adjustable speed levels (1800-3200 RPM)",
+        "Ultra-quiet brushless motor (<45dB)",
+        "Long-lasting 6-hour lithium battery",
+        "Deep tissue penetration (12mm amplitude)",
+        "Ergonomic non-slip grip design",
+        "Includes premium carrying case"
+    ],
+    description: "Our professional-grade deep tissue massage gun delivers targeted percussive therapy to relieve muscle tension, improve recovery, and enhance performance. With 5 speed settings and 6 specialized attachments, it effectively reaches deep muscle layers to break up knots and improve circulation. The ultra-quiet operation makes it perfect for home or gym use.",
+    specs: {
+        "Motor Type": "Brushless (Quiet Operation)",
+        "Speed Settings": "5 levels (1800-3200 RPM)",
+        "Battery Life": "6 hours (2500mAh Lithium)",
+        "Charge Time": "2.5 hours",
+        "Noise Level": "<45 dB",
+        "Amplitude": "12mm (Deep Tissue)",
+        "Attachments": "6 (Bulb, Flat, Fork, etc.)",
+        "Weight": "1.8 lbs",
+        "Warranty": "2 Years"
+    },
+},
+
+"knee-compression-sleeves": {
+    name: "Knee Compression Sleeves",
+    category: "Sports Support",
+    price: "₱300",
+    image: "https://m.media-amazon.com/images/I/61kYH803XIL.jpg",
+    thumbnails: [
+        "https://m.media-amazon.com/images/I/61kYH803XIL.jpg",
+    ],
+    features: [
+        "Breathable 4-way stretch fabric",
+        "Medical-grade compression (20-30mmHg)",
+        "Anti-slip silicone grip at top/bottom",
+        "Seamless design prevents chafing",
+        "Patella support ring for joint stability",
+        "Moisture-wicking & odor-resistant",
+        "Pair included (left & right sleeves)"
+    ],
+    description: "Our premium knee compression sleeves provide targeted support and pain relief for athletes, fitness enthusiasts, and those with active lifestyles. The medical-grade compression improves blood circulation while stabilizing the knee joint during physical activity. Perfect for weightlifting, running, basketball, or recovery from minor knee discomfort.",
+    specs: {
+        "Material": "75% Nylon, 25% Spandex",
+        "Compression Level": "20-30mmHg (Class 1 Medical Grade)",
+        "Care Instructions": "Machine wash cold, air dry",
+        "Thickness": "2mm (lightweight yet supportive)",
+        "Package Includes": "Pair (left & right sleeves)",
+        "Best For": "Running, Basketball, Weightlifting, Arthritis Support"
+    },
+},
+
+"eco-yoga-blocks": {
+    name: "Eco-Friendly Yoga Blocks",
+    category: "Yoga Accessories",
+    price: "₱600.00",
+    image: "https://contents.mediadecathlon.com/p2832142/k$8f51deb28145f34988afd88b4e6fd7d0/foam-yoga-brick-dark-green-kimjaly-8916648.jpg",
+    thumbnails: [
+        "https://contents.mediadecathlon.com/p2832142/k$8f51deb28145f34988afd88b4e6fd7d0/foam-yoga-brick-dark-green-kimjaly-8916648.jpg",
+        "https://www.manduka.com/cdn/shop/products/Props-CorkBlock-2Pack-Cork_01_1.jpg?v=1658877810",
+    ],
+    features: [
+        "Made from 100% recycled EVA foam",
+        "Non-toxic and odor-free material",
+        "Lightweight yet supportive (4lbs each)",
+        "Textured surface for secure grip",
+        "Beveled edges for comfortable hand placement",
+        "Pair of 2 blocks included",
+        "Biodegradable packaging"
+    ],
+    description: "Our eco-conscious yoga blocks provide stable support for all yoga practices while being kind to the planet. Made from recycled EVA foam, these blocks offer the perfect balance of firmness and cushioning for poses, stretches, and meditation support. The textured surface ensures secure grip even during sweaty sessions.",
+    specs: {
+        "Material": "Recycled EVA Foam",
+        "Dimensions": "9\" x 6\" x 4\" (Standard Size)",
+        "Weight": "4 lbs per block",
+        "Package Includes": "2 Blocks",
+        "Certifications": "Eco-Certified, Non-Toxic",
+        "Color Options": "Green, Orange",
+        "Sustainability": "100% Recycled Materials, Biodegradable Packaging"
+    },
+    colors: [
+    { name: "Pale Green", code: "#98fb98", image: "https://contents.mediadecathlon.com/p2832142/k$8f51deb28145f34988afd88b4e6fd7d0/foam-yoga-brick-dark-green-kimjaly-8916648.jpg" },
+    { name: "Orange", code: "#FFA500", image: "https://www.manduka.com/cdn/shop/products/Props-CorkBlock-2Pack-Cork_01_1.jpg?v=1658877810" },
+    ]
+},
+
+"therapy-resistance-bands": {
+    name: "Therapy Resistance Bands Set",
+    category: "Fitness Equipment",
+    price: "₱250.00",
+    image: "https://www.coresteady.com/cdn/shop/products/flatband-grey.jpg?v=1605912550",
+    thumbnails: [
+        "https://www.coresteady.com/cdn/shop/products/flatband-grey.jpg?v=1605912550"
+    ],
+    features: [
+        "Set of 5 resistance levels (X-Light to X-Heavy)",
+        "Latex-free material (hypoallergenic)",
+        "48-inch length for full range of motion",
+        "Includes door anchor and ankle straps",
+        "Portable carry bag included",
+        "Physical therapy approved",
+        "Color-coded for easy identification"
+    ],
+    description: "This professional therapy resistance band set provides graduated resistance for rehabilitation, strength training, and mobility exercises. The latex-free material is safe for users with allergies, while the complete set with accessories makes it perfect for home workouts or physical therapy sessions.",
+    specs: {
+        "Material": "Latex-free Rubber",
+        "Set Includes": "5 Bands, Door Anchor, Ankle Straps, Carry Bag",
+        "Band Length": "48 inches (unstretched)",
+        "Resistance Levels": "X-Light (5-15lbs), Light (10-20lbs), Medium (20-30lbs), Heavy (30-40lbs), X-Heavy (40-50lbs)",
+        "Color Coding": "Yellow (X-Light), Red (Light), Green (Medium), Blue (Heavy), Black (X-Heavy)",
+        "Best For": "Physical Therapy, Home Workouts, Mobility Training"
+    }
+}
+
+}
+
+        // Random first names
+        const firstNames = [
+            'John', 'Sarah', 'Michael', 'Emily', 'David', 'Jessica', 'Robert', 'Jennifer', 
+            'William', 'Elizabeth', 'James', 'Maria', 'Daniel', 'Susan', 'Christopher', 
+            'Lisa', 'Matthew', 'Karen', 'Andrew', 'Nancy', 'Joshua', 'Betty', 'Kevin', 
+            'Margaret', 'Brian', 'Sandra', 'George', 'Ashley', 'Edward', 'Kimberly'
+        ];
+
+        // Random last names
+        const lastNames = [
+            'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 
+            'Garcia', 'Rodriguez', 'Wilson', 'Martinez', 'Anderson', 'Taylor', 
+            'Thomas', 'Hernandez', 'Moore', 'Martin', 'Jackson', 'Thompson', 'White'
+        ];
+
+        // Random review comments by category
+        const reviewComments = {
+            "Fitness Equipment": [
+                "This equipment has transformed my home workouts! The build quality is excellent and it's very durable.",
+                "Exactly what I needed for my fitness routine. Easy to use and store when not in use.",
+                "The quality is good but the instructions could be clearer for assembly.",
+                "Works perfectly for my daily exercises. Much better than I expected for the price.",
+                "I've been using this for a month now and can already see improvements in my strength.",
+                "Very sturdy construction. No wobbling or instability during use.",
+                "The padding is comfortable and the grip is secure. Highly recommend!",
+                "Took a while to get used to but now I can't imagine my workouts without it.",
+                "Great value for money. Comparable to much more expensive brands I've tried.",
+                "Perfect for beginners and advanced users alike. Adjustable difficulty is a plus."
+            ],
+            "Sports Gear": [
+                "This gear performs exactly as advertised. Perfect for both practice and matches.",
+                "The quality is professional-grade. Worth every penny for serious players.",
+                "Comfortable to use for extended periods. No blisters or discomfort.",
+                "Lightweight yet durable. Has survived several intense games without damage.",
+                "The grip is excellent even in wet conditions. Very impressed!",
+                "My game has improved significantly since using this equipment.",
+                "Arrived quickly and was well-packaged. Exactly as shown in the photos.",
+                "The materials feel premium and it's clear this was designed by athletes.",
+                "Good for casual use but might not withstand professional-level intensity.",
+                "Perfect gift for any sports enthusiast. The recipient was thrilled!"
+            ],
+            "Wellness & Recovery": [
+                "This product has been a game-changer for my post-workout recovery.",
+                "Very effective at relieving muscle tension. Use it daily after the gym.",
+                "The materials are high quality and feel great against the skin.",
+                "Noticeably reduces my recovery time between workouts.",
+                "Easy to clean and maintain. Has held up well after months of use.",
+                "Portable enough to take to the office. Great for quick stress relief.",
+                "At first I wasn't sure it would work but after a week I'm a believer!",
+                "Helps me relax after long days. Much better than cheaper alternatives.",
+                "The adjustable settings allow for customized comfort. Very versatile.",
+                "Worth the investment for anyone serious about their wellness routine."
+            ]
+        };
+
+        // Random dates within the past year
+        function getRandomDate() {
+            const start = new Date();
+            start.setMonth(start.getMonth() - 12);
+            const end = new Date();
+            const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        // Generate random reviews
+        function generateReviews(category) {
+            const reviewsContainer = document.getElementById('reviews-container');
+            reviewsContainer.innerHTML = '';
+
+            // Get comments for this category
+            const categoryComments = reviewComments[category] || 
+                [...reviewComments["Fitness Equipment"], ...reviewComments["Sports Gear"], ...reviewComments["Wellness & Recovery"]];
+
+            // Shuffle comments to get unique ones
+            const shuffledComments = [...categoryComments].sort(() => 0.5 - Math.random());
+            
+            // Create 3 reviews
+            for (let i = 0; i < 3; i++) {
+                const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+                const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+                const rating = Math.floor(Math.random() * 2) + 4; // 4-5 stars
+                const comment = shuffledComments[i] || "This product works well for my needs.";
+                const date = getRandomDate();
+
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card';
+                reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <span class="review-author">${firstName} ${lastName}</span>
+                        <div class="star-rating">
+                            <div class="stars">
+                                <span style="width: ${rating * 20}%"></span>
+                            </div>
+                        </div>
+                        <span class="review-date">${date}</span>
+                    </div>
+                    <p class="review-content">${comment}</p>
+                `;
+                reviewsContainer.appendChild(reviewCard);
+            }
+        }
+
+        // Get product ID from URL
+        function getProductIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Load product data
+        function loadProduct() {
+            const productId = getProductIdFromUrl();
+            const product = products[productId];
+            
+            if (!product) {
+                // If product not found, redirect to shop page
+                window.location.href = 'shop.html';
+                return;
+            }
+
+            // Update product information
+            document.querySelector('.product-title').textContent = product.name;
+            document.querySelector('.product-category').textContent = product.category;
+            document.querySelector('.product-price').textContent = product.price;
+            document.querySelector('.product-description').textContent = product.description;
+
+            // Update main product image
+            const mainImage = document.getElementById('main-image');
+            mainImage.src = product.image;
+            mainImage.alt = product.name;
+
+            // Update thumbnail images
+            const thumbnailContainer = document.getElementById('thumbnail-container');
+            thumbnailContainer.innerHTML = '';
+            product.thumbnails.forEach((thumb, index) => {
+                const img = document.createElement('img');
+                img.src = thumb;
+                img.alt = `${product.name} view ${index + 1}`;
+                img.className = 'thumbnail';
+                img.onclick = function() {
+                    mainImage.src = this.src;
+                    // Highlight selected thumbnail
+                    document.querySelectorAll('.thumbnail').forEach(t => t.style.borderColor = 'var(--gray-border)');
+                    this.style.borderColor = 'var(--primary-color)';
+                };
+                if (index === 0) {
+                    img.style.borderColor = 'var(--primary-color)';
+                }
+                thumbnailContainer.appendChild(img);
+            });
+
+            // Update features list
+            const featuresList = document.getElementById('features-list');
+            featuresList.innerHTML = '';
+            product.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+
+            // Update product specifications
+            const specsGrid = document.getElementById('specs-grid');
+            specsGrid.innerHTML = '';
+            for (const [key, value] of Object.entries(product.specs)) {
+                const specRow = document.createElement('div');
+                specRow.className = 'spec-row';
+                specRow.innerHTML = `
+                    <span class="spec-name">${key}</span>
+                    <span class="spec-value">${value}</span>
+                `;
+                specsGrid.appendChild(specRow);
+            }
+
+            // Update color options if product has colors
+            if (product.colors && product.colors.length > 0) {
+                const colorOptions = document.getElementById('color-options');
+                colorOptions.innerHTML = '';
+                
+                product.colors.forEach((color, index) => {
+                    const colorOption = document.createElement('div');
+                    colorOption.className = 'color-option';
+                    colorOption.style.backgroundColor = color.code;
+                    colorOption.dataset.color = color.name;
+                    colorOption.dataset.image = color.image;
+                    colorOption.dataset.index = index;
+                    
+                    // Add tooltip with color name
+                    const tooltip = document.createElement('span');
+                    tooltip.className = 'color-tooltip';
+                    tooltip.textContent = color.name;
+                    colorOption.appendChild(tooltip);
+                    
+                    colorOption.addEventListener('click', function() {
+                        // Remove selected class from all options
+                        document.querySelectorAll('.color-option').forEach(option => {
+                            option.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                        
+                        // Update main image if color has a different image
+                        if (color.image) {
+                            document.getElementById('main-image').src = color.image;
+                        }
+                    });
+                    
+                    // Select first color by default
+                    if (index === 0) {
+                        colorOption.classList.add('selected');
+                        if (color.image) {
+                            document.getElementById('main-image').src = color.image;
+                        }
+                    }
+                    
+                    colorOptions.appendChild(colorOption);
+                });
+                
+                document.getElementById('color-selector').style.display = 'block';
+            } else {
+                document.getElementById('color-selector').style.display = 'none';
+            }
+
+            // Generate reviews for this product's category
+            generateReviews(product.category);
+
+            // Update related products
+            loadRelatedProducts(product.category, productId);
+
+            // Update page title
+            document.title = `${product.name} | Athlix`;
+        }
+
+        // Load related products from the same category
+        function loadRelatedProducts(category, currentProductId) {
+            const relatedGrid = document.getElementById('related-grid');
+            relatedGrid.innerHTML = '';
+            
+            // Filter products by category and exclude current product
+            const relatedProducts = Object.entries(products)
+                .filter(([id, product]) => product.category === category && id !== currentProductId)
+                .slice(0, 4); // Show max 4 related products
+            
+            if (relatedProducts.length === 0) {
+                relatedGrid.innerHTML = '<p>No related products found.</p>';
+                return;
+            }
+            
+            relatedProducts.forEach(([id, product]) => {
+                const card = document.createElement('div');
+                card.className = 'related-card';
+                card.innerHTML = `
+                    <a href="details.html?id=${id}">
+                        <img src="${product.image}" alt="${product.name}" class="related-img">
+                        <div class="related-info">
+                            <span class="related-category">${product.category}</span>
+                            <h3 class="related-title">${product.name}</h3>
+                            <div class="related-price">${product.price}</div>
+                        </div>
+                    </a>
+                `;
+                relatedGrid.appendChild(card);
+            });
+        }
+
+        // Quantity selector functions
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        }
+
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        }
+
+        // Add to cart functionality
+        function addToCart() {
+            const productId = getProductIdFromUrl();
+            const product = products[productId];
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            // Get selected color
+            let selectedColor = null;
+            const selectedColorOption = document.querySelector('.color-option.selected');
+            if (selectedColorOption) {
+                selectedColor = {
+                    name: selectedColorOption.dataset.color,
+                    code: selectedColorOption.style.backgroundColor,
+                    image: selectedColorOption.dataset.image
+                };
+            }
+            
+            if (!product) return;
+
+            const cartItem = {
+                id: productId,
+                title: product.name,
+                category: product.category,
+                price: product.price,
+                image: selectedColor?.image || product.image,
+                quantity: quantity,
+                color: selectedColor?.name || null
+            };
+            
+            // Get current cart or initialize empty array
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Check if product with same color already in cart
+            const existingItemIndex = cart.findIndex(item => 
+                item.id === productId && item.color === cartItem.color
+            );
+            
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                cart.push(cartItem);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Show confirmation with color if applicable
+            const colorText = selectedColor ? ` (${selectedColor.name})` : '';
+            alert(`${product.name}${colorText} (${quantity}) has been added to your cart!`);
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                
+                // Add animation
+                cartCount.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    cartCount.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProduct();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
